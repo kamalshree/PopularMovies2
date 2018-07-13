@@ -100,16 +100,46 @@
             android:id="@+id/tv_overview"
             android:layout_width="@dimen/margin_zero_dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_eight_dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="@dimen/margin_eight_dp"
             android:layout_marginStart="@dimen/margin_eight_dp"
             android:layout_marginTop="@dimen/margin_sixteen_dp"
             android:text="@string/description"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/vp_trailer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_releasedate" />
+
+
+        <TextView
+            android:id="@+id/tv_trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Trailer"
+            android:textColor="@color/text_color"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@+id/vp_trailer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_overview" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="161dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_overview" />
+
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

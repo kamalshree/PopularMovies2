@@ -2,6 +2,8 @@ package com.android.popularmovies.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by kamalshree on 6/11/2018.
  */
@@ -28,7 +30,13 @@ public class MovieResource {
     @SerializedName("backdrop_path")
     private String backdrop_Path;
 
-    public MovieResource(String poster_url,String originalTitle,String movieId) {
+    private String trailer;
+    private List<String> trailerList;
+
+    public MovieResource() {
+    }
+
+    public MovieResource(String poster_url, String originalTitle, String movieId) {
         this.poster_Url=poster_url;
         this.originalTitle=originalTitle;
         this.movieId=movieId;
@@ -97,5 +105,21 @@ public class MovieResource {
 
     public void setMovieId(String movieId) {
         this.movieId = movieId;
+    }
+
+    public List<String> getTrailerList() {
+        return trailerList;
+    }
+
+    public void setTrailerList(List<String> trailerList) {
+        this.trailerList = trailerList;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 }

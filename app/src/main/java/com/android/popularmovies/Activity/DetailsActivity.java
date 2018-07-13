@@ -3,6 +3,7 @@ package com.android.popularmovies.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.popularmovies.Adapter.TrailerAdapter;
 import com.android.popularmovies.BuildConfig;
 import com.android.popularmovies.Model.MovieResource;
 import com.android.popularmovies.R;
@@ -24,12 +26,14 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,9 +67,14 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.movie_toolbar)
     Toolbar movie_toolbar;
 
+    @BindView(R.id.vp_trailer)
+    ViewPager trailerPager;
 
     private String movieId, movieName;
     private MovieResource movieData;
+    private String trailerkey;
+    ArrayList<String> trailerList;
+    int keylist = 0;
 
     private void initViews() {
         setContentView(R.layout.activity_details);
@@ -75,6 +84,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        movieData = new MovieResource();
         if (getIntent() != null) {
             Intent intent = getIntent();
             Bundle bundle = intent.getExtras();
@@ -96,7 +106,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         getMovieDetails();
-
+        getTrailer();
     }
 
     /* Set the Movie Details */
@@ -158,6 +168,55 @@ public class DetailsActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
 
+    }
+
+    /* get the trailer details */
+    private void getTrailer() {
+        Uri.Builder params = new Uri.Builder();
+        params.appendEncodedPath(movieId);
+        params.appendEncodedPath(getString(R.string.videos));
+        params.appendQueryParameter("api_key", BuildConfig.API_KEY);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, MovieConstants.MOVIE_URL + params, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray(getString(R.string.json_results));
+                    if (jsonArray.length() > 0) {
+                        trailerkey = jsonArray.getJSONObject(0).getString(getString(R.string.json_key));
+                        movieData.setTrailer(BuildConfig.YOUTUBE_BASE_URL + trailerkey);
+                        trailerList = new ArrayList<>();
+                        while (keylist < jsonArray.length()) {
+                            trailerList.add(jsonArray.getJSONObject(keylist).getString(getString(R.string.json_key)));
+                            keylist++;
+                        }
+                        movieData.setTrailerList(trailerList);
+                        updateTrailerViewPager();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void updateTrailerViewPager() {
+        trailerkey = movieData.getTrailerList().get(0);
+        TrailerAdapter sectionsPagerAdapter = new TrailerAdapter(this, movieData.getTrailerList());
+        trailerPager.setAdapter(sectionsPagerAdapter);
+        trailerPager.setClipToPadding(false);
+        trailerPager.setPadding(48, 0, 48, 0);
+        trailerPager.setPageMargin(14);
     }
 
 }

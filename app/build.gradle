@@ -16,15 +16,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField 'String', 'API_KEY', '"API KEY TO BE INSERTED"'
+            buildConfigField 'String', 'API_KEY', '"d893d0a902ca41894ede625f58ce0bb9"'
             buildConfigField 'String', 'BASE_URL', '"http://api.themoviedb.org/3/"'
             buildConfigField 'String', 'IMAGE_BASE_URL', '"http://image.tmdb.org/t/p/"'
+            buildConfigField 'String', 'YOUTUBE_BASE_URL', '"http://www.youtube.com/watch?v="'
+            buildConfigField 'String', 'YOUTUBE_IMAGE_BASE_URL', '"http://img.youtube.com/vi/"'
         }
 
         release {
-            buildConfigField 'String', 'API_KEY', '"API KEY TO BE INSERTED"'
+            buildConfigField 'String', 'API_KEY', '"d893d0a902ca41894ede625f58ce0bb9"'
             buildConfigField 'String', 'BASE_URL', '"http://api.themoviedb.org/3/"'
             buildConfigField 'String', 'IMAGE_BASE_URL', '"http://image.tmdb.org/t/p/"'
+            buildConfigField 'String', 'YOUTUBE_BASE_URL', '"http://www.youtube.com/watch?v="'
+            buildConfigField 'String', 'YOUTUBE_IMAGE_BASE_URL', '"http://img.youtube.com/vi/"'
         }
     }
 }
