@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    tools:context="com.android.popularmovies.Activity.DetailsActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- ToolBar -->
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/movie_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_movie_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movie_title"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/img_backdrop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/backdrop_image_height"
+            android:contentDescription="@string/backdrop_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_toolbar" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="@dimen/margin_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_eight_dp"
+            android:layout_marginStart="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_sixteen_dp"
+            android:text="@string/movietitle"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_poster"
+            app:layout_constraintTop_toBottomOf="@+id/img_backdrop" />
+
+        <ImageView
+            android:id="@+id/img_poster"
+            android:layout_width="@dimen/detail_poster_image_width"
+            android:layout_height="@dimen/detail_poster_image_height"
+            android:layout_marginStart="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_eight_dp"
+            android:contentDescription="@string/poster_image"
+            app:layout_constraintBottom_toBottomOf="@+id/img_backdrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_backdrop" />
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="@dimen/margin_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_eight_dp"
+            android:layout_marginStart="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_eight_dp"
+            android:text="@string/rating"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_releasedate"
+            android:layout_width="@dimen/margin_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_eight_dp"
+            android:layout_marginStart="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_eight_dp"
+            android:text="@string/release_date"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:layout_width="@dimen/margin_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_eight_dp"
+            android:layout_marginEnd="@dimen/margin_eight_dp"
+            android:layout_marginStart="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_sixteen_dp"
+            android:text="@string/description"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_releasedate" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
