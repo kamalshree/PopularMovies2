@@ -19,4 +19,10 @@
     <dimen name="trailer_play_button_height">40dp</dimen>
     <dimen name="trailer_relative_layout_height">150dp</dimen>
 
+    <dimen name="review_twenty_two">22sp</dimen>
+    <dimen name="review_margin_down">10dp</dimen>
+    <dimen name="review_author_text">16sp</dimen>
+    <dimen name="margin_five_dp">5dp</dimen>
+    <dimen name="viewpager_height">161dp</dimen>
+    <dimen name="recycler_bottom_margin">13dp</dimen>
 </resources>

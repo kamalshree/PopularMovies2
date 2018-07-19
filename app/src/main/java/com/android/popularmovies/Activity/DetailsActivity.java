@@ -5,15 +5,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.popularmovies.Adapter.ReviewAdapter;
 import com.android.popularmovies.Adapter.TrailerAdapter;
 import com.android.popularmovies.BuildConfig;
 import com.android.popularmovies.Model.MovieResource;
+import com.android.popularmovies.Model.ReviewDetails;
 import com.android.popularmovies.R;
 import com.android.popularmovies.Utils.MovieConstants;
 import com.android.volley.Request;
@@ -22,8 +26,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 
 import org.json.JSONArray;
@@ -41,7 +48,6 @@ import java.text.ParseException;
 import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
-
 
     @BindView(R.id.tv_title)
     TextView textTitle;
@@ -74,6 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
     private MovieResource movieData;
     private String trailerkey;
     ArrayList<String> trailerList;
+    RecyclerView recyclerview;
     int keylist = 0;
 
     private void initViews() {
@@ -94,6 +101,10 @@ public class DetailsActivity extends AppCompatActivity {
 
         initViews();
 
+        recyclerview = (RecyclerView) findViewById(R.id.rv_review);
+        recyclerview.setHasFixedSize(true);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
+
         /* Toolbar */
         movie_toolbar.setNavigationIcon(R.drawable.ic_back);
         movie_toolbar_title.setText(movieName);
@@ -106,7 +117,14 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         getMovieDetails();
+        if (movieData.getReviewList() == null) {
+            getReviews();
+        }else {
+            updateReviewViewPager();
+        }
         getTrailer();
+
+
     }
 
     /* Set the Movie Details */
@@ -194,6 +212,7 @@ public class DetailsActivity extends AppCompatActivity {
                         }
                         movieData.setTrailerList(trailerList);
                         updateTrailerViewPager();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -219,4 +238,45 @@ public class DetailsActivity extends AppCompatActivity {
         trailerPager.setPageMargin(14);
     }
 
+
+    /* get the Reviews details */
+    private void getReviews() {
+        Uri.Builder params = new Uri.Builder();
+        params.appendEncodedPath(movieId);
+        params.appendEncodedPath(getString(R.string.reviews));
+        params.appendQueryParameter("api_key", BuildConfig.API_KEY);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, MovieConstants.MOVIE_URL + params, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray(getString(R.string.json_results));
+                    if (jsonArray.length() > 0) {
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<ArrayList<ReviewDetails>>() {
+                        }.getType();
+                        ArrayList<ReviewDetails> reviewArrayList = gson.fromJson(jsonArray.toString(), listType);
+                        movieData.setReviewList(reviewArrayList);
+                        updateReviewViewPager();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void updateReviewViewPager() {
+        ReviewAdapter recyclerAdapter = new ReviewAdapter(this,R.layout.review_items, movieData.getReviewList());
+        recyclerview.setAdapter(recyclerAdapter);
+    }
 }

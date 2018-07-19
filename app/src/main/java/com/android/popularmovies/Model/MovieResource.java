@@ -33,6 +33,8 @@ public class MovieResource {
     private String trailer;
     private List<String> trailerList;
 
+    private List<ReviewDetails> reviewList;
+
     public MovieResource() {
     }
 
@@ -121,5 +123,13 @@ public class MovieResource {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    public List<ReviewDetails> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<ReviewDetails> reviewList) {
+        this.reviewList = reviewList;
     }
 }

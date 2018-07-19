@@ -21,4 +21,12 @@
     <string name="json_key">key</string>
     <string name="trailer_default_image">/0.jpg</string>
     <string name="youtube_app_url">vnd.youtube:</string>
+    <string name="reviews">reviews</string>
+    <string name="read_more">ReadMore</string>
+    <string name="read_less">ReadLess</string>
+    <string name="review_name">Name</string>
+    <string name="review_author">Author</string>
+    <string name="review_readmore">ReadMore</string>
+    <string name="review_title">Reviews</string>
+    <string name="trailer_title">Trailers</string>
 </resources>
