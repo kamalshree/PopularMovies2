@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background"
-    tools:context="com.android.popularmovies.Activity.DetailsActivity">
+    tools:context="com.android.popularmovies.DetailActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         </android.support.v7.widget.Toolbar>
 
         <ImageView
-            android:id="@+id/img_backdrop"
+            android:id="@+id/iv_backdrop"
             android:layout_width="match_parent"
             android:layout_height="@dimen/backdrop_image_height"
             android:contentDescription="@string/backdrop_image"
@@ -57,7 +57,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_poster"
-            app:layout_constraintTop_toBottomOf="@+id/img_backdrop" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_backdrop" />
 
         <ImageView
             android:id="@+id/img_poster"
@@ -66,9 +66,9 @@
             android:layout_marginStart="@dimen/margin_eight_dp"
             android:layout_marginTop="@dimen/margin_eight_dp"
             android:contentDescription="@string/poster_image"
-            app:layout_constraintBottom_toBottomOf="@+id/img_backdrop"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_backdrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_backdrop" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_backdrop" />
 
         <TextView
             android:id="@+id/tv_rating"
@@ -169,5 +169,50 @@
             app:layout_constraintTop_toBottomOf="@+id/vp_trailer"/>
 
 
+        <com.like.LikeButton
+            android:id="@+id/star_button"
+            android:layout_width="@dimen/heart_weight"
+            android:layout_height="@dimen/heart_height"
+            android:layout_marginEnd="@dimen/margin_eight_dp"
+            android:layout_marginTop="@dimen/margin_eight_dp"
+            app:icon_size="40dp"
+            app:icon_type="@string/heart_text"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_backdrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_backdrop" />
+
+
+        <!-- No Internet Connection layout -->
+        <LinearLayout
+            android:id="@+id/layout_noconnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_eight_dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_internet_connection"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/text_color" />
+
+            <Button
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_ten_dp"
+                android:padding="@dimen/padding_five_dp"
+                android:text="@string/refresh_con"
+                android:textColor="@color/text_color_black" />
+
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

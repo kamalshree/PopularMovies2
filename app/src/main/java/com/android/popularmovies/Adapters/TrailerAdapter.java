@@ -1,4 +1,4 @@
-package com.android.popularmovies.Adapter;
+package com.android.popularmovies.Adapters;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -12,23 +12,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.android.popularmovies.BuildConfig;
+import com.android.popularmovies.Model.TrailerData;
 import com.android.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-
 /**
- * Created by kamalshree on 7/11/2018.
+ * Created by kamalshree on 7/22/2018.
  */
 
-public class TrailerAdapter extends PagerAdapter{
+public class TrailerAdapter extends PagerAdapter {
     Context context;
-    private List<String> list;
+    private List<TrailerData> list;
     LayoutInflater layoutInflater;
 
 
-    public TrailerAdapter(Context context, List<String> list) {
+    public TrailerAdapter(Context context, List<TrailerData> list) {
         this.context = context;
         this.list = list;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,21 +49,22 @@ public class TrailerAdapter extends PagerAdapter{
         View itemView = layoutInflater.inflate(R.layout.trailer_items, container, false);
 
         ImageView trailerImage = (ImageView) itemView.findViewById(R.id.trailer_image);
-        Picasso.get().load(BuildConfig.YOUTUBE_IMAGE_BASE_URL + list.get(position) + context.getString(R.string.trailer_default_image)).resize(300,200)
-                .placeholder(R.drawable.ic_launcher_background).into(trailerImage);
+        Picasso.get().load(BuildConfig.YOUTUBE_IMAGE_BASE_URL + list.get(position).getKey() + context.getString(R.string.trailer_default_image)).resize(300,200)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .into(trailerImage);
         container.addView(itemView);
 
         //listening to image click
         trailerImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.youtube_app_url) + list.get(position)));
-                Intent webIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(BuildConfig.YOUTUBE_BASE_URL + list.get(position)));
+                Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.YOUTUBE_BASE_URL + list.get(position).getKey()));
                 try {
+                    appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(appIntent);
                 } catch (ActivityNotFoundException ex) {
-                    context.startActivity(webIntent);
+                    context.startActivity(appIntent);
                 }
             }
         });

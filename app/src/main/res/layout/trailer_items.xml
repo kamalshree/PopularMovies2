@@ -8,6 +8,7 @@
         android:id="@+id/trailer_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/trailer_title"
         android:scaleType="centerCrop" />
 
     <ImageView
@@ -15,5 +16,6 @@
         android:layout_height="@dimen/trailer_play_button_height"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:contentDescription="@string/trailer_play"
         android:src="@drawable/ic_play" />
 </RelativeLayout>

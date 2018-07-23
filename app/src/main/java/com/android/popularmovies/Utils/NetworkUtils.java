@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by kamalshree on 6/19/2018.
+ * Created by kamalshree on 7/22/2018.
  */
 
 public class NetworkUtils {
@@ -21,7 +21,7 @@ public class NetworkUtils {
 
             return (mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting());
         } else
-        return false;
+            return false;
     }
 
 }

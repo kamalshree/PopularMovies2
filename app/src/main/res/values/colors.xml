@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#FF4081</color>
@@ -7,8 +8,6 @@
     <color name="text_color">#FFF</color>
     <color name="text_color_black">#000</color>
     <color name="youtube_color">#e62f27</color>
-    <color name="review_color">#9e2222</color>
     <color name="line_seperator">#C8C8C8</color>
-
 
 </resources>

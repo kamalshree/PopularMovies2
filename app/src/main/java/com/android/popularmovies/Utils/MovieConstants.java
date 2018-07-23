@@ -3,7 +3,7 @@ package com.android.popularmovies.Utils;
 import com.android.popularmovies.BuildConfig;
 
 /**
- * Created by kamalshree on 6/19/2018.
+ * Created by kamalshree on 7/22/2018.
  */
 
 public class MovieConstants {
@@ -14,8 +14,7 @@ public class MovieConstants {
     public static final String BACKDROP_IMAGE_VIEW = BuildConfig.IMAGE_BASE_URL + "w500/";
     public static final String MOVIE_URL = BuildConfig.BASE_URL + "movie";
 
-    public static final String MOVIE_ID ="movieid";
-    public static final String MOVIE_NAME ="moviename";
+    public static final String MOVIE_ID = "movieid";
+    public static final String MOVIE_NAME = "moviename";
 
 }
-

@@ -15,12 +15,12 @@
     <string name="no_internet_message">You need to have Mobile Data or wifi to access this. Press ok to Exit</string>
     <string name="no_interent_okbutton">ok</string>
     <string name="no_internet_connection">No internet Connection</string>
+    <string name="no_trailer">No Trailer Available</string>
     <string name="refresh_con">Refresh</string>
     <string name="videos">videos</string>
     <string name="json_results">results</string>
     <string name="json_key">key</string>
     <string name="trailer_default_image">/0.jpg</string>
-    <string name="youtube_app_url">vnd.youtube:</string>
     <string name="reviews">reviews</string>
     <string name="read_more">ReadMore</string>
     <string name="read_less">ReadLess</string>
@@ -29,4 +29,11 @@
     <string name="review_readmore">ReadMore</string>
     <string name="review_title">Reviews</string>
     <string name="trailer_title">Trailers</string>
+    <string name="no_reviews">No Reviews Available</string>
+    <string name="failed">Failed Try Again!</string>
+    <string name="rating_text">Rating : </string>
+    <string name="release_text">Release Date : </string>
+    <string name="heart_text">heart</string>
+    <string name="trailer_play">play</string>
+
 </resources>
